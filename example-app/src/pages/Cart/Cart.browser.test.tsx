@@ -73,7 +73,7 @@ test("When removing a product from cart, then DELETE API is called and product d
   // Assert
   await expect
     .element(
-      page.getByRole("status", { name: cartTranslations.removedFromCart })
+      page.getByRole("alert", { name: cartTranslations.removedFromCart })
     )
     .toBeVisible();
   const elements = page
@@ -110,7 +110,7 @@ test.skip("When removing a product from cart, then DELETE API is called and prod
   // Assert
   await expect
     .element(
-      page.getByRole("status", { name: cartTranslations.removedFromCart })
+      page.getByRole("alert", { name: cartTranslations.removedFromCart })
     )
     .toBeVisible();
   await expect

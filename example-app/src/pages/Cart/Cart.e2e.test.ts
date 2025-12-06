@@ -38,7 +38,7 @@ test("When removing a product from cart, then DELETE API is called and product d
 
   // Assert
   await expect(
-    page.getByRole("status", { name: "Removed from cart successfully" })
+    page.getByRole("alert", { name: "Removed from cart successfully" })
   ).toBeVisible();
   await expect(
     page.getByRole("region", { name: productToRemove.title })
