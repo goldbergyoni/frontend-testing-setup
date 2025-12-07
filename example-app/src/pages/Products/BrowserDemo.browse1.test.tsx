@@ -11,9 +11,9 @@ test("Check user/password Login", async () => {
 
   await render(<Login />);
 
-  await fillLoginDetails({ username: "john.doe", password: "password" }); // Creates an accessToken in local storage
+  await fillLoginDetails({ username: "john.doe", password: "password" });
 
-  // This action 👆 triggers a page redirect to '/login-successful'
+  // This creates a local accessToken + page redirect to '/login-successful'
 
   expect
     .element(page.getByRole("banner", { name: "Sign-in successful" }))

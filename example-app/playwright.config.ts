@@ -4,6 +4,8 @@ export default defineConfig({
   testDir: ".",
   testMatch: ["**/*.e2e.test.ts", "**/pr-flow-recorder-**.test.ts"],
   timeout: 140_000,
+  fullyParallel: true,
+  workers: 6,
   use: {
     baseURL: "http://localhost:5173",
   },

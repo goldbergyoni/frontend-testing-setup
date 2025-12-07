@@ -23,7 +23,6 @@ import { UserFixture } from "@/test-lib/fixtures/UserFixture";
 import {
   cartTranslations,
   createCartRouter,
-  createCartRouterWithLayout,
   setCartWithProducts,
   deleteRequest,
 } from "@/test-lib/helpers/cart-browser-helpers";
@@ -87,39 +86,3 @@ for (let i = 1; i <= 8; i++) {
     });
   });
 }
-
-test.skip("When removing a product from cart, then DELETE API is called and product disappears (with full page layout)", async () => {
-  // Arrange
-  const productToRemove = ProductFixture.createPermutation({
-    id: 1,
-    title: "Wireless Bluetooth Headphones",
-  });
-  const productToKeep = ProductFixture.createPermutation({
-    id: 2,
-    title: "Cotton T-Shirt",
-  });
-  setCartWithProducts(worker, [productToRemove, productToKeep]);
-  const spyOnDeleteRequest = deleteRequest(worker);
-  await render(<BrowserTestProviders router={createCartRouterWithLayout()} />);
-
-  // Act
-  await page
-    .getByRole("region", { name: productToRemove.title })
-    .getByRole("button", { name: "Product actions" })
-    .click();
-  await page.getByRole("menuitem", { name: "Remove from cart" }).click();
-
-  // Assert
-  await expect
-    .element(
-      page.getByRole("alert", { name: cartTranslations.removedFromCart })
-    )
-    .toBeVisible();
-  await expect
-    .element(page.getByRole("region", { name: productToKeep.title }))
-    .toBeVisible();
-  expect(await spyOnDeleteRequest).toEqual({
-    cartId: "1",
-    productId: String(productToRemove.id),
-  });
-});

@@ -1,5 +1,9 @@
+import { createRequire } from "node:module";
 import type { StorybookConfig } from "@storybook/react-vite";
 import * as tsconfigPaths from "vite-tsconfig-paths";
+
+// AIDEV-NOTE: Required for Node.js v22+ ESM compatibility with Storybook
+const require = createRequire(import.meta.url);
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.stories.@(js|jsx|ts|tsx)"],

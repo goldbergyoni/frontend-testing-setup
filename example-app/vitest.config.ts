@@ -24,6 +24,7 @@ export default defineConfig((env) =>
         environment: "jsdom",
         setupFiles: "./test-setup.ts",
         globalSetup: "./test-globals.ts",
+        maxWorkers: 6,
         coverage: {
           provider: "istanbul",
           reporter: [
