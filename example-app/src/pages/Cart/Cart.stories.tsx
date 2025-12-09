@@ -1,9 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, userEvent, within } from "@storybook/test";
 import { http, HttpResponse } from "msw";
+import { expect, userEvent, within } from "storybook/test";
 import { withRouter } from "storybook-addon-remix-react-router";
 
 import { host } from "@/lib/http";

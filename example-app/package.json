@@ -87,7 +87,7 @@
     "storybook-addon-remix-react-router": "5.0.0",
     "typescript": "5.8.2",
     "typescript-eslint": "8.30.1",
-    "vite": "7.0.5",
+    "vite": "6.4.1",
     "vite-plugin-checker": "0.10.1",
     "vite-tsconfig-paths": "5.1.4",
     "vitest": "4.0.6",
