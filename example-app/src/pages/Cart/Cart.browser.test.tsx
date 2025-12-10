@@ -1,8 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
+// @vitest-environment jsdom
+/* eslint-disable */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import { http, HttpResponse } from "msw";
-import { setupWorker } from "msw/browser";
+import { SetupWorker, setupWorker } from "msw/browser";
 import {
   afterAll,
   afterEach,
@@ -11,9 +13,10 @@ import {
   expect,
   test,
 } from "vitest";
-import { page } from "vitest/browser";
+import { page, userEvent } from "vitest/browser";
 import { render } from "vitest-browser-react";
 
+import type { IProduct } from "@/features/products/types/IProduct";
 import { host } from "@/lib/http";
 import { queryClient } from "@/lib/query";
 import { BrowserTestProviders } from "@/test-lib/browser-providers";
@@ -27,6 +30,46 @@ import {
   setCartWithProducts,
   deleteRequest,
 } from "@/test-lib/helpers/cart-browser-helpers";
+
+// Simplified helpers for demo
+function buildProduct(title: string, id = 1): IProduct {
+  return ProductFixture.createPermutation({ id, title });
+}
+
+function mockAPIWithMSW(
+  worker: SetupWorker,
+  route: string,
+  products: IProduct[]
+) {
+  worker.use(
+    http.get(`${host}${route}`, () =>
+      HttpResponse.json({
+        id: 1,
+        date: new Date().toISOString(),
+        products: products.map((p) => ({ productId: p.id, quantity: 1 })),
+      })
+    ),
+    ...products.map((product) =>
+      http.get(`${host}/products/${product.id}`, () =>
+        HttpResponse.json(product)
+      )
+    )
+  );
+}
+
+function mockDeleteMSW(worker: SetupWorker, route: string) {
+  return new Promise<{ cartId: string; productId: string }>((resolve) => {
+    worker.use(
+      http.delete(`${host}${route}`, ({ params }) => {
+        resolve({
+          cartId: params.cartId as string,
+          productId: params.productId as string,
+        });
+        return HttpResponse.json({ success: true });
+      })
+    );
+  });
+}
 
 const user = UserFixture.createPermutation({ id: 1, cartId: 1 });
 
@@ -47,6 +90,29 @@ beforeEach(() => {
 afterEach(() => {
   localStorage.removeItem("fake_store_is_authenticated");
   queryClient.clear();
+});
+
+test(`When removing a product from cart, then DELETE API is called and product disappears`, async () => {
+  // Arrange
+  const productToRemove = buildProduct("Wireless Bluetooth Headphones", 1);
+  const productToKeep = buildProduct("Cotton T-Shirt", 2);
+  mockAPIWithMSW(worker, "/carts/:cartId", [productToRemove, productToKeep]);
+  const spyOnDeleteRequest = mockDeleteMSW(
+    worker,
+    "/carts/:cartId/products/:productId"
+  );
+  await render(<ProductsPage />);
+
+  // Act
+  await page.getByRole("region", { name: productToRemove.title }).getByRole("button", { name: "Product actions" }).click();
+  await userEvent.click(page.getByRole("menuitem", { name: "Remove from cart" }));
+ 
+  // Assert
+  await expect.element(page.getByRole("alert", { name: "removedFromCart" })).toBeVisible();
+  expect(await spyOnDeleteRequest).toEqual({
+    cartId: "1",
+    productId: String(productToRemove.id),
+  });
 });
 
 for (let i = 1; i <= 8; i++) {

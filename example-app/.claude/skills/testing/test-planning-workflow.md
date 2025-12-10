@@ -11,12 +11,14 @@ The sequence of steps that must be followed when planning, writing, and verifyin
 Before writing any test, you must understand what you're testing.
 
 #### 1.1 Read the Source Code
+
 - [ ] Read the source file(s) under test
 - [ ] Identify public API / exported functions
 - [ ] Note dependencies and external calls
 - [ ] Understand the expected behavior
 
 #### 1.2 Inspect the Running Application (for UI tests)
+
 ```bash
 # Navigate to the page
 mcp__playwright__browser_navigate --url="http://localhost:5173/your-route"
@@ -29,6 +31,7 @@ mcp__playwright__browser_take_screenshot
 ```
 
 #### 1.3 Analyze Network & Console
+
 ```bash
 # Discover which API endpoints the component calls
 mcp__playwright__browser_network_requests
@@ -38,6 +41,7 @@ mcp__playwright__browser_console_messages
 ```
 
 #### 1.4 Find Existing Patterns
+
 - [ ] Check `test-lib/fixtures/` for existing data factories
 - [ ] Check `test-lib/handlers/` for existing MSW handlers
 - [ ] Look at similar tests in the codebase for patterns
@@ -47,6 +51,7 @@ mcp__playwright__browser_console_messages
 ### Step 2: Plan Test Scenarios
 
 Using [testing-strategy.md](./testing-strategy.md), identify:
+
 - [ ] Which test type(s) to use (unit, component, integration)
 - [ ] Happy path scenarios
 - [ ] Edge cases and error conditions
@@ -66,6 +71,7 @@ mcp__test-coverage__start_recording --lcovPath="coverage/lcov.info"
 ### Step 4: Write Tests
 
 Following [test-patterns.md](./test-patterns.md):
+
 - [ ] Read the 6 critical rules before writing
 - [ ] Use AAA structure (Arrange-Act-Assert)
 - [ ] Apply smoking gun principle
