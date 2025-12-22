@@ -1,10 +1,29 @@
 /* eslint-disable */
+// @ts-nocheck
 
 import { test, expect } from "vitest";
 import { page } from "vitest/browser";
 import { render } from "vitest-browser-react";
 
 // Demo: Vitest browser mode shares context within a file (no test-level isolation)
+
+async function mockGetUserAPI() {
+  throw new Error("Function not implemented.");
+}
+
+test("Move from cart to wishlist", async () => {
+  await navigateToCart();
+  await clickAddToWishlist({ productName: "Wireless Bluetooth Headphones" }); // Saved in local storage
+  await navigateToWishlist();
+  await ensureItemOnPage({ productName: "Wireless Bluetooth Headphones" });
+});
+
+test("Delete from cart", async () => {
+  await navigateToCart();
+  await clickDeleteFromCart({ productName: "Wireless Bluetooth Headphones" });
+});
+
+
 
 test("Check user/password Login", async () => {
   await mockGetUserAPI(); // API is called by a loader and a fetcher
@@ -48,4 +67,23 @@ function Login() {
       <button type="submit">{"Sign In"}</button>
     </form>
   );
+}
+function navigateToCart() {
+  throw new Error("Function not implemented.");
+}
+
+function clickAddToWishlist(arg0: { productName: string }) {
+  throw new Error("Function not implemented.");
+}
+
+function navigateToWishlist() {
+  throw new Error("Function not implemented.");
+}
+
+function ensureItemOnPage(arg0: { productName: string }) {
+  throw new Error("Function not implemented.");
+}
+
+function clickAddToCart(arg0: { productName: string }) {
+  throw new Error("Function not implemented.");
 }

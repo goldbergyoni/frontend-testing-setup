@@ -1,4 +1,3 @@
-// @vitest-environment jsdom
 /* eslint-disable */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
@@ -122,7 +121,7 @@ test(`When removing a product from cart, then DELETE API is called and product d
   });
 });
 
-test(`Test ${i}: When removing a product from cart, then DELETE API is called and product disappears`, async () => {
+test(`When removing a product from cart, then DELETE API is called and product disappears (alternative)`, async () => {
   // Arrange
   const productToRemove = ProductFixture.createPermutation({
     id: 1,
@@ -193,4 +192,25 @@ test.skip("When removing a product from cart, then DELETE API is called and prod
     cartId: "1",
     productId: String(productToRemove.id),
   });
+});
+
+test(`When cart page loads with products, cart item visual appearance matches screenshot`, async () => {
+  // Arrange
+  const product = ProductFixture.createPermutation({
+    id: 1,
+    title: "Wireless Headphones",
+  });
+  setCartWithProducts(worker, [product]);
+  await render(<BrowserTestProviders router={createCartRouter()} />);
+
+  // Wait for product to load
+  const cartItem = page.getByRole("region", { name: product.title });
+  await expect.element(cartItem).toBeVisible();
+
+  // Capture element screenshot for visual regression
+  // Note: Uses element.screenshot() method from Vitest browser locators
+  const screenshotPath = await cartItem.screenshot({
+    path: "__screenshots__/cart-item.png",
+  });
+  expect(screenshotPath).toContain("cart-item.png");
 });

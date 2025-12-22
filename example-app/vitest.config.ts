@@ -86,11 +86,21 @@ export default defineConfig((env) =>
                 "src/**/*.browser.test.ts",
                 "src/**/*.browser.test.tsx",
               ],
+              environment: undefined,
               browser: {
                 enabled: true,
                 provider: playwright(),
                 headless: true,
                 instances: [{ browser: "chromium" }],
+                expect: {
+                  toMatchScreenshot: {
+                    comparatorOptions: {
+                      threshold: 0.2,
+                      allowedMismatchedPixelRatio: 0.01,
+                    },
+                    timeout: 10000,
+                  },
+                },
               },
             },
           },
