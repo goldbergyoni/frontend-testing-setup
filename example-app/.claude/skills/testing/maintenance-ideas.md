@@ -12,10 +12,14 @@ http://localhost:5173/products
 
 # Ideas not to execute yet
 
+- Clarify that folder thing (sdd or not)
+- Task workflow is not respected
+- Create failing tests in a file, not just titles
+- Test plan template - test type, framework, no priority, no coverage,
+- Coverage command
 - Put the verifier
 - Healer
 - Make agents return score
-- Clarify that folder thing (sdd or not)
 - Manual instructions
 - Instructions: On every change, run the tests
 - Benchmarks
