@@ -15,6 +15,14 @@
       "load-more": {
         "no-more": "No more products",
         "show-more": "Show more products"
+      },
+      "filters": {
+        "title": "Filters",
+        "name": "Product name",
+        "name-placeholder": "Search by name...",
+        "min-price": "Min price",
+        "max-price": "Max price",
+        "reset": "Reset filters"
       }
     },
     "product": {

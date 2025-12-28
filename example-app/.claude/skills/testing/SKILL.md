@@ -16,33 +16,9 @@ A key guide on how to plan and code with testing in mind inclding how to write t
 | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [IMPORTANT: The Test Workflow](./test-workflow.md)                    | The sequence of steps that must be followed when planning, writing, and verifying tests. | **MUST be read before any feature or test coding.** Follow this workflow from start to finish for any testing task - it ensures thorough context gathering before writing and proper verification after.                               |
 | [🚀 Useful Commands](./test-commands.md)                              | Commands to start the application and run tests.                                         | Use these commands to get the system running for investigation, run tests before adding new ones to establish baseline, and run again after writing tests to verify they pass.                                                         |
-| [🎯 Testing Strategy](./testing-strategy.md)                          | Guidance on what types of tests to write and how to plan exhaustive test cases.          | Consult during planning to decide between unit/component/integration tests and to systematically identify edge cases that need coverage.                                                                                               |
-| [🛠️ Testing Framework & Libraries](./testing-workflow-tooling.md)     | Which test runners, libraries, and tools to prefer.                                      | Reference when setting up tests to ensure you're using the recommended frameworks and following project conventions.                                                                                                                   |
+| [🎯 Testing Strategy & Tooling](./testing-strategy-and-tooling.md)    | Guidance on test types (page vs component vs unit), what outcomes to test, and which frameworks/libraries to use. | Consult during planning to decide test types, understand what to verify, and ensure you're using the recommended frameworks.                                                                                                           |
 | [📐 Test Code: Patterns & Practices](#-test-code-patterns--practices) | Mandatory rules and best practices for writing tests.                                    | These rules must be read and followed every time tests are written. See detailed breakdown below.                                                                                                                                      |
-| [🔧 Test Tools & Agents](./tools-and-agents.md)                       | MCP tools and specialized agents for testing workflows.                                  | Reference when you need browser automation (Playwright), coverage measurement, test planning, healing failing tests, or fixing accessibility issues. Includes test-planner, test-healer, test-verifier, and page-locator-fixer agents. |
-
----
-
-## 🔄 Typical Workflow
-
-```
-1. Read test-planning-workflow.md → Follow the mandatory steps
-2. Read testing-strategy.md → Decide test types, plan edge cases
-3. Read test-patterns.md → Internalize rules before writing
-4. Run existing tests (test-commands.md) → Establish baseline
-5. Write tests following patterns
-6. Run tests again → Verify they pass
-7. Execute verification (test-verification.md) → Mandatory final checks
-```
-
----
-
-## ⚠️ Important Rules
-
-1. **Always follow the workflow** - The sequence in test-planning-workflow.md is mandatory
-2. **Read patterns before writing** - test-patterns.md rules must be followed strictly
-3. **Run verification** - [test-verification.md](./test-verification.md) checks are required before completing work
-4. **Use tools and agents** - See [tools-and-agents.md](./tools-and-agents.md) for available MCP tools and specialized agents
+| [🔧 Test Tools (MCP) & Agents](./tools-and-agents.md)                 | MCP tools and specialized agents for testing workflows.                                  | Reference when you need browser automation (Playwright), coverage measurement, test planning, healing failing tests, or fixing accessibility issues. Includes test-planner, test-healer, test-verifier, and page-locator-fixer agents. |
 
 ---
 

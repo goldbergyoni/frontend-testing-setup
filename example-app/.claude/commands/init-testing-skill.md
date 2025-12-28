@@ -1,6 +1,6 @@
-# Initialize Testing Skill Links
+# Initialize Testing Skill
 
-Link project memory files and SDD framework templates to the testing skill.
+Set up the testing skill for this project: install required MCP servers, link project memory files, and integrate with spec-driven development frameworks.
 
 ## Prerequisites
 
@@ -9,7 +9,43 @@ Link project memory files and SDD framework templates to the testing skill.
 
 ## Tasks
 
-### 1. Update Memory Files
+### 1. Install MCP Servers
+
+The testing skill requires these MCP servers for browser automation, test execution, and coverage tracking.
+
+**Required MCP Servers:**
+
+| Server          | Purpose                                        | Source                                                                 |
+| --------------- | ---------------------------------------------- | ---------------------------------------------------------------------- |
+| Playwright      | Browser automation, snapshots, screenshots     | [Microsoft](https://github.com/microsoft/playwright-mcp)               |
+| Playwright Test | Test execution, debugging, locator generation  | [Playwright](https://playwright.dev/) (built-in)                       |
+| Test Coverage   | Coverage summary, file coverage, diff tracking | [test-coverage-mcp](https://github.com/goldbergyoni/test-coverage-mcp) |
+
+**Ask the user:**
+
+> Would you like me to install the required MCP servers for the testing skill?
+>
+> - Playwright (browser automation)
+> - Playwright Test (test execution)
+> - Test Coverage (coverage tracking)
+
+**If user confirms**, run these commands to install each server:
+
+```bash
+claude mcp add playwright -- npx @playwright/mcp@latest
+claude mcp add playwright-test -- npx playwright run-test-mcp-server
+claude mcp add test-coverage -- npx -y test-coverage-mcp
+```
+
+**After installation**, verify the servers are available by checking that these tool prefixes work:
+
+- `mcp__playwright__*`
+- `mcp__playwright-test__*`
+- `mcp__test-coverage__*`
+
+Report installation status to the user.
+
+### 2. Update Memory Files
 
 Search project root for these files:
 
@@ -29,7 +65,7 @@ For each file found:
 Testing is a core practice in this project. For planning, coding, or reviewing - consult the testing skill at `.claude/skills/testing/SKILL.md`. Follow the workflow in `.claude/skills/testing/test-workflow.md`.
 ```
 
-### 2. Detect SDD Framework
+### 3. Detect SDD Framework
 
 Check for these spec-driven development frameworks:
 
@@ -42,7 +78,7 @@ Check for these spec-driven development frameworks:
 
 Report which framework found (or "none detected").
 
-### 3. Update SDD Framework Files (if detected)
+### 4. Update SDD Framework Files (if detected)
 
 **A. Update framework's AGENTS.md** - Add this section (if not already referencing testing skill):
 
@@ -73,12 +109,15 @@ Any spec creation, task planning, or tech design must align with the testing ski
 | BMAD      | `bmad/templates/*.md` or `.bmad/templates/*.md`       |
 | AgentOS   | `agentos/templates/*.md` or `.agentos/templates/*.md` |
 
-### 4. Output Summary
+### 5. Output Summary
 
 Print this summary at the end:
 
 ```
 ## Testing Skill Initialization Complete
+
+### MCP Servers:
+- [list installed servers, or "skipped by user", or "already installed"]
 
 ### Memory Files Updated:
 - [list each file updated, or "none found"]

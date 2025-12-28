@@ -42,7 +42,6 @@
     ],
     "deny": [
       "Bash(rm -rf /)",
-      "Bash(:(){ :|:& };:)",
       "Bash(dd if=/dev/random of=/dev/sda)",
       "Bash(chmod -R 777 /)",
       "Bash(wget -O- | bash)",

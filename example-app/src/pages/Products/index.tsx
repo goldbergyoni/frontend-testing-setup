@@ -1,38 +1,54 @@
-import { SettingsIcon } from "@chakra-ui/icons";
 import { Button } from "@chakra-ui/react";
 import { useState } from "react";
 
+import { useProductFilters } from "@/features/products/application/use-product-filters";
 import { useProductsQuery } from "@/features/products/infrastructure/productsQuery";
+import { ProductFiltersPopover } from "@/features/products/presentation/ProductFiltersPopover";
 import { ProductsList } from "@/features/products/presentation/ProductsList";
 import { Page } from "@/lib/components/Layout/Page";
 import { PageHeader } from "@/lib/components/Layout/PageHeader";
 import { ErrorPageStrategy } from "@/lib/components/Result/ErrorPageStrategy";
-import { useNotImplementedYetToast } from "@/lib/components/Toast/useNotImplementedYetToast";
 import { useTranslations } from "@/lib/i18n/useTransations";
 import type { IQueryParams } from "@/types/IQueryParams";
 
 const defaultParams: IQueryParams = { limit: 10, sort: "asc" };
 
 const ProductsPage = () => {
-  const notImplemented = useNotImplementedYetToast();
   const t = useTranslations("pages.products");
 
   const [params, setParams] = useState<IQueryParams>(defaultParams);
   const { data, isFetching } = useProductsQuery(params, {
     keepPreviousData: true,
   });
+  const {
+    filters,
+    setName,
+    setMinPrice,
+    setMaxPrice,
+    resetFilters,
+    hasActiveFilters,
+    filterProducts,
+  } = useProductFilters();
 
+  const filteredProducts = filterProducts(data.products);
   const noMoreProducts = data.meta.total <= params.limit;
 
   return (
     <Page>
       <PageHeader title={t("title")} description={t("description")}>
-        <Button leftIcon={<SettingsIcon />} onClick={notImplemented}>
-          {t("more-filters")}
-        </Button>
+        <ProductFiltersPopover
+          name={filters.name}
+          minPrice={filters.minPrice}
+          maxPrice={filters.maxPrice}
+          hasActiveFilters={hasActiveFilters}
+          onNameChange={setName}
+          onMinPriceChange={setMinPrice}
+          onMaxPriceChange={setMaxPrice}
+          onReset={resetFilters}
+        />
       </PageHeader>
-      <ProductsList products={data.products} />
-      {data.products.length > 0 && (
+      <ProductsList products={filteredProducts} />
+      {filteredProducts.length > 0 && (
         <Button
           w="100%"
           onClick={() =>

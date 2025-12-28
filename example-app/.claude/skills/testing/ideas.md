@@ -1,30 +1,16 @@
-# Tasks list
+# Demo
 
-1. Create a config.toml configuration file in the testing skill root with these items: stop-when-no-plan, stop-when-no-page-analysis, test-framework, code-mocking-framework, network-interception-framework, must-have-human-review-of-plan, app-start-command, app-stop-command (nullable but recommended), test-start-command, test-context-root-folder (where to save test plans, possible value: 'given-spec-folder', 'custom-path'), test-context-folder-name (where to save test plans, test results and other artifacts), app-url (the frontend or api base url),
-
-Put sensible comments for each. They deal with whether the agent should stop if there are no tests, there is no test plan or no page analysis, what is the chosen test framework, and the rest is pretty self-explanatory. This this config will get used to make decisions during the workflow
-
-2. Create test-workflow.md - this file that is being referred to from the @SKILL.md is the key explanation of the desired testing workflow. We should create here a very concise instruction that will be used by the planning and coding agent. First, a high-level instruction: if any of these principles are violated during runtime, please print a bold message to the user that there is a testing violation. First step of the workflow: during task planning, the first task of a phase or user story is to create the test's definition (not necessary the implementation). This makes the next coding task have a clear definition of done in the context: The last task of a task series is to ensure the test passes and invokes the test verifier agent. Second. before planning or coding tests, we must ensure that there is a test context folder, a place to store the various test artifacts (not code). The coding agent might pass some specific given spec folder, or there is a custom path where we always wish to save underneath test plans. Third before coding any tests, there must be first two key artifacts:
-   A. app-analysis.md, which summarizes run-time information from the Target App (like all the network calls that happen in the Target section)
-   B. test-plan.md, which has a definition of all the desired test cases.
-   We should stop and avoid writing tests if these mandatory artifacts are not found unless the config item stop_when_no_plan is explicitly set to false.
-   Fourth. When coding a test, ensure to read and take into account the testing skill section that is called "Test Code Patterns and Practices" And use the various tools that are mentioned in the testing skill, contextually upon it
-   Fifth. After coding all the desired tests, be sure to invoke the test verifier agent
-
-3. In @test-commands.md explain that to start the application, stop it, run the tests. We should refer the corresponding config keys, not to change the markdown themselves but rather just point to the grid from the config. This way, our testing skill remains system-agnostic. Find the keys and include them in the description. In any file under the testing skill where you see a reference to some start or test command, replace the instructions with an instruction to read from the config key. Put the real key name.
-
-4. Fix Typos in system-wide-e2e-best-practices.md
-
-- Line 7: "havesummarize" should be "have summarize" or "should summarize"
-- Line 11: "dedciated" should be "dedicated"
-
-5. Replace hard-coded URLs with corresponding config like config.app-url
+- Usage 1: feature request
+- Usage 2: test request
+- A diagram
 
 # Ideas not to execute yet
 
-- Solve the test plan issue, tasks are not good
-- Connect to main context: OpenSpec, Agents.md, claude.md
-- Try a feature - add a contact support page, use claude.md workflow, it will generate test cases... where? failure...
+- Put the verifier
+- Healer
+- Make agents return score
+- Clarify that folder thing (sdd or not)
+- Manual instructions
 - Create agents - test plan, test verify
 - More detailed test-plan.cases - how to reproduce, what is expected,
 - Init: install MCP, fill config,

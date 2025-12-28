@@ -20,7 +20,11 @@ Measure and track code coverage. Get project/file coverage summaries, record bas
 
 ### test-planner ✅
 
-Analyzes web pages and creates test plans. Navigates to target page, documents elements and ARIA attributes, captures network/console, proposes test cases with simulation guidance. Outputs `test-plan.md` and `page-analysis.md`. Invoke via `/plan-test`.
+Creates test context folder and test plan. Sets up working folder, measures coverage baseline, proposes test cases with simulation guidance. Can run early (even before page exists). Outputs `test-plan.md`. Invoke via `/plan-test`.
+
+### page-analyzer ✅
+
+Analyzes web pages for testing. Navigates to target page, documents interactive elements and ARIA attributes, captures network/console, takes screenshots and accessibility snapshots. **MANDATORY before writing tests** - call when page skeleton exists. Outputs `page-analysis.md`.
 
 ### test-healer 🚧
 
@@ -40,9 +44,10 @@ Add ARIA attributes to elements lacking accessibility. Identifies elements that 
 
 | Scenario | Use |
 |----------|-----|
-| Planning tests for a new page | `test-planner` |
+| Starting test planning (early, even before page) | `test-planner` |
+| Analyzing page elements before writing tests | `page-analyzer` |
 | Measuring coverage | `test-coverage-mcp` |
-| Inspecting page elements | `@playwright/mcp` |
+| Inspecting page elements manually | `@playwright/mcp` |
 | Debugging failing tests | `test-healer` |
 | Verifying tests are complete | `test-verifier` |
 | Fixing missing ARIA | `page-locator-fixer` |
