@@ -26,6 +26,8 @@ A key guide on how to plan and code with testing in mind inclding how to write t
 
 **Read [The Test Anatomy](./patterns-and-practices/the-test-anatomy.md) before writing any test.**
 
+**📌 Canonical Example:** For a real, working example that demonstrates all patterns, read the test configured in `config.toml` under `[canonical_example]`.
+
 | Document                                                                                        | When to Use                                                                                                    |
 | ----------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | [The Test Anatomy](./patterns-and-practices/the-test-anatomy.md)                                | **Mandatory first read** - Core structure, 6 critical rules, AAA pattern, and examples                         |

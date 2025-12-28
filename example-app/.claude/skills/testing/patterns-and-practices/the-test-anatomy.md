@@ -152,6 +152,8 @@ test('When filtering by active status, then only active orders are displayed', a
 })
 ```
 
+> 📌 **Real-world example:** For a complete page test demonstrating these patterns, see the canonical test configured in `config.toml` under `[canonical_example]`.
+
 ---
 
 ## In Closing

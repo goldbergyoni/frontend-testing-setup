@@ -1,9 +1,7 @@
 import { Button } from "@chakra-ui/react";
 import { useState } from "react";
 
-import { useProductFilters } from "@/features/products/application/use-product-filters";
 import { useProductsQuery } from "@/features/products/infrastructure/productsQuery";
-import { ProductFiltersPopover } from "@/features/products/presentation/ProductFiltersPopover";
 import { ProductsList } from "@/features/products/presentation/ProductsList";
 import { Page } from "@/lib/components/Layout/Page";
 import { PageHeader } from "@/lib/components/Layout/PageHeader";
@@ -20,35 +18,14 @@ const ProductsPage = () => {
   const { data, isFetching } = useProductsQuery(params, {
     keepPreviousData: true,
   });
-  const {
-    filters,
-    setName,
-    setMinPrice,
-    setMaxPrice,
-    resetFilters,
-    hasActiveFilters,
-    filterProducts,
-  } = useProductFilters();
 
-  const filteredProducts = filterProducts(data.products);
   const noMoreProducts = data.meta.total <= params.limit;
 
   return (
     <Page>
-      <PageHeader title={t("title")} description={t("description")}>
-        <ProductFiltersPopover
-          name={filters.name}
-          minPrice={filters.minPrice}
-          maxPrice={filters.maxPrice}
-          hasActiveFilters={hasActiveFilters}
-          onNameChange={setName}
-          onMinPriceChange={setMinPrice}
-          onMaxPriceChange={setMaxPrice}
-          onReset={resetFilters}
-        />
-      </PageHeader>
-      <ProductsList products={filteredProducts} />
-      {filteredProducts.length > 0 && (
+      <PageHeader title={t("title")} description={t("description")} />
+      <ProductsList products={data.products} />
+      {data.products.length > 0 && (
         <Button
           w="100%"
           onClick={() =>

@@ -4,6 +4,12 @@
 - Usage 2: test request
 - A diagram
 
+# Test prompt
+
+In the products page, please add a button on the upper part of the screen to allow filtering for products locally without backend. The button name should be "Filters". When clicked, a popover is opened that allows to filter by product name, by a range of prices, and also to reset filters. Also, to submit once the filters are submitted, then obviously the products are being filtered. Ensure to use the testing skill while planning and coding
+
+http://localhost:5173/products
+
 # Ideas not to execute yet
 
 - Put the verifier
@@ -11,11 +17,10 @@
 - Make agents return score
 - Clarify that folder thing (sdd or not)
 - Manual instructions
+- Instructions: On every change, run the tests
+- Benchmarks
 - Create agents - test plan, test verify
 - More detailed test-plan.cases - how to reproduce, what is expected,
-- Init: install MCP, fill config,
-- test-planner agent
-- Use workflow only to create tasks
 - Agents ping pong
 
 ### 10. Command Files Don't Exist in Expected Locations
