@@ -2,6 +2,14 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
 const translations = {
+  shared: {
+    result: {
+      "empty-state": {
+        heading: "No results found",
+        description: "Unfortunately, there is nothing for you here yet!",
+      },
+    },
+  },
   pages: {
     cart: {
       title: "List of selected products",
@@ -19,6 +27,15 @@ const translations = {
       "load-more": {
         "no-more": "No more products",
         "show-more": "Show more products",
+      },
+      filters: {
+        button: "Filters",
+        header: "Filter products",
+        name: "Product name",
+        "name-placeholder": "Search by name...",
+        "min-price": "Min price",
+        "max-price": "Max price",
+        reset: "Reset",
       },
     },
   },

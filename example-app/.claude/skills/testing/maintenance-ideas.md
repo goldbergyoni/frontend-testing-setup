@@ -14,6 +14,9 @@ http://localhost:5173/products
 
 - Clarify that folder thing (sdd or not)
 - Task workflow is not respected
+- page-analysis conflicts, reads from previous folder
+- Remove test write agent
+- When to implement the tests
 - Create failing tests in a file, not just titles
 - Test plan template - test type, framework, no priority, no coverage,
 - Coverage command
